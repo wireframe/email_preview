@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "email_preview"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{preview emails within your webbrowser}
+    gem.description = %Q{render and send sample html and plain text emails to see what they will *really* look like}
     gem.email = "ryan@socialcast.com"
     gem.homepage = "http://github.com/wireframe/email_preview"
     gem.authors = ["Ryan Sonnek"]
