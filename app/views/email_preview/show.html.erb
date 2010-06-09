@@ -14,16 +14,20 @@
   <button type="submit">Send</button>
 </form>
 
+<!--
 <h3>Debug output</h3>
 <pre>
   <%= @mail.to_s %>
 </pre>
+-->
 
 <h3>Body</h3>
 <% parts = @mail.multipart? ? @mail.parts : [@mail] %>
 <% parts.each do |part| %>
-<h4><%= part.content_type %></h4>
-<pre>
-<%= part.body %>
-</pre>
+  <h4><%= part.content_type %></h4>
+  <% if part.content_type.include?('text/plain') %>
+  <pre><%= part.body %></pre>
+  <% elsif part.content_type.include?('text/html') %>
+    <%= part.body.to_s.html_safe %>
+  <% end %>
 <% end %>
