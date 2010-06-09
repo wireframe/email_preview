@@ -4,6 +4,7 @@ preview emails within your web browser
 
 = Features
 * preview HTML emails from within your web browser
+* emails are reloaded with each view so you can tweak/save/refresh for instant verification
 * convenient form to send any email preview directly to your *real* inbox
 * only exposes routes in development mode to prevent leaking into production mode
 
