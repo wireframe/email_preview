@@ -1,4 +1,5 @@
-require 'email_preview/engine' if defined?(Rails)
+require 'engine' if defined?(Rails)
+require 'mail'
 
 module EmailPreview
 
