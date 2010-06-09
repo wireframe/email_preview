@@ -22,6 +22,27 @@ config/initializers/email_preview.rb
     end
   end
 
+  EmailPreview.register 'multipart email (html + text)' do
+    Mail.new do
+      from 'mikel@test.lindsaar.net'
+      to 'you@test.lindsaar.net'
+      subject 'This is a test email'
+
+      text_part do
+        body 'This is plain text'
+      end
+      html_part do
+        content_type 'text/html; charset=UTF-8'
+        body '<h1>This is HTML</h1>'
+      end
+    end
+  end
+
+  EmailPreview.register 'user activation email' do
+    u = User.new :email => 'foo@example.com'
+    UserNotifier.activation
+  end
+
 by default, email_preview is only available in development mode.  to turn on globally use:
   EmailPreview.allowed_environments << 'production'
 
