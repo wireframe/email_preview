@@ -4,6 +4,7 @@ preview emails within your web browser
 
 = Features
 * preview HTML emails from within your web browser
+* convenient form to send any email preview directly to your *real* inbox
 * only exposes routes in development mode to prevent leaking into production mode
 
 = Installation
@@ -26,9 +27,6 @@ by default, email_preview is only available in development mode.  to turn on glo
 
 browse the list of registered emails and preview them in your browser at:
 http://localhost:3000/email_preview
-
-= TODO
-* add ability to send email directly from the email preview
 
 == Note on Patches/Pull Requests
  

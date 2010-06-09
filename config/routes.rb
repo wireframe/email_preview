@@ -3,5 +3,8 @@ Rails.application.routes.draw do |map|
     collection do
       get :list
     end
+    member do
+      post :deliver
+    end
   end
 end

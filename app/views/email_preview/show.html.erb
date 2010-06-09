@@ -8,11 +8,11 @@
   Subject: <%= @mail.subject %>
 </div>
 
-<form>
+<% form_tag deliver_email_preview_path(params[:id]) do %>
   <p>Send this email to your inbox:</p>
   <%= text_field_tag :to %>
   <button type="submit">Send</button>
-</form>
+<% end %>
 
 <!--
 <h3>Debug output</h3>
