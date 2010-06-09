@@ -13,6 +13,7 @@ gem 'email_preview'
 = Usage
 
 config/initializers/email_preview.rb
+<pre>
 EmailPreview.register :my_email_example do
   Mail.new do
     to 'tom@example.com'
@@ -20,9 +21,12 @@ EmailPreview.register :my_email_example do
     body 'check this out'
   end
 end
+<pre>
 
 by default, email_preview is only available in development mode.  to turn on globally use:
+<pre>
 EmailPreview.allowed_environments << 'production'
+</pre>
 
 http://localhost:3000/email_preview
 
