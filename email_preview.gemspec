@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_preview}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Sonnek"]
-  s.date = %q{2010-06-08}
+  s.date = %q{2010-06-09}
   s.description = %q{render and send sample html and plain text emails to see what they will *really* look like}
   s.email = %q{ryan@socialcast.com}
   s.extra_rdoc_files = [
@@ -25,8 +25,12 @@ Gem::Specification.new do |s|
      "VERSION",
      "app/controllers/email_preview_controller.rb",
      "app/views/email_preview/index.html.erb",
+     "app/views/email_preview/list.html.erb",
+     "app/views/email_preview/show.html.erb",
      "config/routes.rb",
+     "email_preview.gemspec",
      "lib/email_preview.rb",
+     "lib/engine.rb",
      "test/helper.rb",
      "test/test_email_preview.rb"
   ]
