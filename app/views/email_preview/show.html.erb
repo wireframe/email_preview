@@ -13,10 +13,16 @@
   <%= text_field_tag :to %>
   <button type="submit">Send</button>
 </form>
-<hr />
-<% parts = @mail.parts.any? ? @mail.parts : [@mail] %>
+
+<h3>Debug output</h3>
+<pre>
+  <%= @mail.to_s %>
+</pre>
+
+<h3>Body</h3>
+<% parts = @mail.multipart? ? @mail.parts : [@mail] %>
 <% parts.each do |part| %>
-<strong><%= part.content_type %></strong>
+<h4><%= part.content_type %></h4>
 <pre>
 <%= part.body %>
 </pre>
