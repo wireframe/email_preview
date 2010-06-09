@@ -1,6 +1,33 @@
 = email_preview
 
-Description goes here.
+preview emails within your web browser
+
+= Features
+* preview HTML emails from within your web browser
+* only exposes routes in development mode to prevent leaking into production mode
+
+= Installation
+
+gem 'email_preview'
+
+= Usage
+
+#config/initializers/email_preview.rb
+EmailPreview.register :my_email_example do
+  Mail.new do
+    to 'tom@example.com'
+    from 'me@foo.com'
+    body 'check this out'
+  end
+end
+
+#by default, email_preview is only available in development mode.  to turn on globally:
+EmailPreview.allowed_environments << 'production'
+
+http://localhost:3000/email_preview
+
+= TODO
+* add ability to send email directly from the email preview
 
 == Note on Patches/Pull Requests
  
