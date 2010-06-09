@@ -13,7 +13,7 @@ gem 'email_preview'
 = Usage
 
 config/initializers/email_preview.rb
-  EmailPreview.register :my_email_example do
+  EmailPreview.register 'simple example email' do
     Mail.new do
       to 'tom@example.com'
       from 'me@foo.com'
@@ -28,7 +28,6 @@ browse the list of registered emails and preview them in your browser at:
 http://localhost:3000/email_preview
 
 = TODO
-* make the templates 'reloadable' so you don't need to restart the app to view changes
 * add ability to send email directly from the email preview
 
 == Note on Patches/Pull Requests

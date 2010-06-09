@@ -3,7 +3,7 @@ class EmailPreviewController < ApplicationController
   before_filter :enforce_allowed_environments
 
   def show
-    @mail = EmailPreview.emails[params[:id].to_sym]
+    @mail = EmailPreview.preview params[:id]
   end
   private
   def enforce_allowed_environments

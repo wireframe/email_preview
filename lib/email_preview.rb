@@ -1,5 +1,4 @@
 require 'engine' if defined?(Rails)
-require 'mail'
 
 module EmailPreview
 
@@ -12,9 +11,13 @@ module EmailPreview
       @allowed_environments
     end
     def register(key, &block)
-      mail = yield
       self.emails ||= {}
-      self.emails[key] = mail
+      self.emails[key] = block
+    end
+    def preview(key)
+      puts self.emails[key]
+      block = self.emails[key]
+      block.call
     end
   end
 end

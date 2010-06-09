@@ -3,7 +3,7 @@ require 'helper'
 class TestEmailPreview < Test::Unit::TestCase
   context "with one registered email" do
     setup do
-      EmailPreview.register :hello_world do
+      EmailPreview.register "basic email" do
         Mail.new do
           from 'mikel@test.lindsaar.net'
           to 'you@test.lindsaar.net'

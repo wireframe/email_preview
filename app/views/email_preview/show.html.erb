@@ -1,1 +1,17 @@
+<div>
+  To: <%= @mail.to %>
+</div>
+<div>
+  From: <%= @mail.from %>
+</div>
+<hr />
+<pre>
 <%= @mail.body %>
+</pre>
+
+<% @mail.parts.each do |part| %>
+<strong><%= part.content_type %></strong>
+<frame>
+<%= part.body %>
+</frame>
+<% end %>
