@@ -4,14 +4,20 @@
 <div>
   From: <%= @mail.from %>
 </div>
-<hr />
-<pre>
-<%= @mail.body %>
-</pre>
+<div>
+  Subject: <%= @mail.subject %>
+</div>
 
-<% @mail.parts.each do |part| %>
+<form>
+  <p>Send this email to your inbox:</p>
+  <%= text_field_tag :to %>
+  <button type="submit">Send</button>
+</form>
+<hr />
+<% parts = @mail.parts.any? ? @mail.parts : [@mail] %>
+<% parts.each do |part| %>
 <strong><%= part.content_type %></strong>
-<frame>
+<pre>
 <%= part.body %>
-</frame>
+</pre>
 <% end %>
