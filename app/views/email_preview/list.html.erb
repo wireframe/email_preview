@@ -1,5 +1,5 @@
 <ul>
-<% EmailPreview.emails.keys.each do |key| %>
+<% EmailPreview.emails.keys.sort.each do |key| %>
   <li><%= link_to key, email_preview_path(key), :target => 'render' %>
 <% end%>
 </ul>
