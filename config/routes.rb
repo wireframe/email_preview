@@ -5,6 +5,7 @@ Rails.application.routes.draw do |map|
     end
     member do
       post :deliver
+      get :display
     end
   end
 end
