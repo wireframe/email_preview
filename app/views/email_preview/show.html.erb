@@ -16,7 +16,7 @@
 <div class='headers'>
   <span class="header">To:</span>
   <span class="header_value"><%= @mail.to %></span>
-  <% form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>
+  <%= form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>
     <%= text_field_tag :to, '', :placeholder => 'Send this email to me@yourcompany.com' %>
     <button type="submit">Send</button>
   <% end %>
