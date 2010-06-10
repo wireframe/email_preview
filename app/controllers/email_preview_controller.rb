@@ -1,18 +1,13 @@
 class EmailPreviewController < ApplicationController
   unloadable
   before_filter :enforce_allowed_environments
-  before_filter :build_email, :only => [:show, :deliver, :display]
+  before_filter :build_email, :only => [:show, :deliver]
   layout nil
 
   def deliver
     @mail.to params[:to]
     @mail.deliver
     redirect_to email_preview_path(params[:id])
-  end
-  def display
-    @mail.to_s
-    part = @mail.multipart? ? @mail.parts.select {|p| p.content_type == params[:content_type]}.first : @mail
-    render :text => part.body
   end
   private
   def enforce_allowed_environments

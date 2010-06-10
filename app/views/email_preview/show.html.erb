@@ -9,8 +9,8 @@
   .deliver_form input {
     width: 250px;
   }
-  .body_display {
-    width: 80%;
+  .content_type {
+    margin: .5em 0;
   }
 </style>
 <div class='headers'>
@@ -29,7 +29,6 @@
   <span class="header">Subject:</span>
   <span class="header_value"><%= @mail.subject %></span>
 </div>
-<hr />
 <!--
 <h3>Debug output</h3>
 <pre>
@@ -39,6 +38,11 @@
 
 <% parts = @mail.multipart? ? @mail.parts : [@mail] %>
 <% parts.each do |part| %>
-  <h3><%= part.content_type %></h3>
-  <iframe class="body_display" src="<%= display_email_preview_path(params[:id], :content_type => part.content_type) %>"></iframe>
+  <h3 class="content_type"><%= part.content_type %></h3>
+  <hr />
+  <% if part.content_type.include?('text/plain') %>
+    <pre><%= part.body %></pre>
+  <% elsif part.content_type.include?('text/html')%>
+    <%= part.body.to_s.html_safe %>
+  <% end %>
 <% end %>
