@@ -1,19 +1,35 @@
-<div>
-  To: <%= @mail.to %>
+<style>
+  .header {
+    color: #333;
+    font-weight: bold;
+  }
+  .deliver_form {
+    margin-bottom: 0;
+  }
+  .deliver_form input {
+    width: 250px;
+  }
+  .body_display {
+    width: 80%;
+  }
+</style>
+<div class='headers'>
+  <span class="header">To:</span>
+  <span class="header_value"><%= @mail.to %></span>
+  <% form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>
+    <%= text_field_tag :to, '', :placeholder => 'Send this email to me@yourcompany.com' %>
+    <button type="submit">Send</button>
+  <% end %>
 </div>
-<div>
-  From: <%= @mail.from %>
+<div class='headers'>
+  <span class="header">From:</span>
+  <span class="header_value"><%= @mail.from %></span>
 </div>
-<div>
-  Subject: <%= @mail.subject %>
+<div class='headers'>
+  <span class="header">Subject:</span>
+  <span class="header_value"><%= @mail.subject %></span>
 </div>
-
-<% form_tag deliver_email_preview_path(params[:id]) do %>
-  <p>Send this email to your inbox:</p>
-  <%= text_field_tag :to %>
-  <button type="submit">Send</button>
-<% end %>
-
+<hr />
 <!--
 <h3>Debug output</h3>
 <pre>
@@ -21,9 +37,8 @@
 </pre>
 -->
 
-<h3>Body</h3>
 <% parts = @mail.multipart? ? @mail.parts : [@mail] %>
 <% parts.each do |part| %>
-  <h4><%= part.content_type %></h4>
-  <iframe src="<%= display_email_preview_path(params[:id], :content_type => part.content_type) %>"></iframe>
+  <h3><%= part.content_type %></h3>
+  <iframe class="body_display" src="<%= display_email_preview_path(params[:id], :content_type => part.content_type) %>"></iframe>
 <% end %>
