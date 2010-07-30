@@ -1,10 +1,10 @@
 <style>
-  .header {
+  .headers {
     color: #333;
-    font-weight: bold;
   }
   .deliver_form {
     margin-bottom: 0;
+    float: right;
   }
   .deliver_form input {
     width: 250px;
@@ -13,22 +13,16 @@
     margin: .5em 0;
   }
 </style>
-<div class='headers'>
-  <span class="header">To:</span>
-  <span class="header_value"><%= @mail.to %></span>
-  <%= form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>
-    <%= text_field_tag :to, '', :placeholder => 'Send this email to me@yourcompany.com' %>
-    <button type="submit">Send</button>
-  <% end %>
-</div>
-<div class='headers'>
-  <span class="header">From:</span>
-  <span class="header_value"><%= @mail.from %></span>
-</div>
-<div class='headers'>
-  <span class="header">Subject:</span>
-  <span class="header_value"><%= @mail.subject %></span>
-</div>
+<%= form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>
+  <%= text_field_tag :to, '', :placeholder => 'Send this email to me@yourcompany.com' %>
+  <button type="submit">Send</button>
+<% end %>
+<h2>Message Headers</h2>
+<pre class='headers'>
+<% @mail.header_fields.each do |header| %>
+<%= header.name %>:  <%= header.decoded %>
+<% end %>
+</pre>
 <!--
 <h3>Debug output</h3>
 <pre>
@@ -36,6 +30,7 @@
 </pre>
 -->
 
+<h2>Message Content</h2>
 <% parts = @mail.multipart? ? @mail.parts : [@mail] %>
 <% parts.each do |part| %>
   <h3 class="content_type"><%= part.content_type %></h3>
