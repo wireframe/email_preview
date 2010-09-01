@@ -1,0 +1,5 @@
+<ul>
+<% EmailPreview.emails.each_index do |index| %>
+  <li><%= link_to EmailPreview.emails[index][:description], email_preview_path(index), :target => 'render' %>
+<% end%>
+</ul>

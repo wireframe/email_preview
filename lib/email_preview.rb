@@ -11,14 +11,12 @@ module EmailPreview
       @allowed_environments ||= ['development', 'test']
       @allowed_environments
     end
-    def register(key, &block)
-      self.emails ||= {}
-      self.emails[key] = block
+    def register(description, &block)
+      self.emails ||= []
+      self.emails << {:description => description, :block => block }
     end
-    def preview(key)
-      puts self.emails[key]
-      block = self.emails[key]
-      block.call
+    def preview(index)
+      self.emails[index.to_i][:block].call
     end
   end
 end
