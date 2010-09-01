@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_preview}
-  s.version = "0.3.1"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Sonnek"]
@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "app/controllers/email_preview_controller.rb",
      "app/views/email_preview/index.html.erb",
-     "app/views/email_preview/list.html.erb",
+     "app/views/email_preview/navigation.html.erb",
      "app/views/email_preview/show.html.erb",
      "config/routes.rb",
      "email_preview.gemspec",
