@@ -19,9 +19,7 @@
 <% end %>
 <h2>Message Headers</h2>
 <pre class='headers'>
-<% @mail.header_fields.each do |header| %>
-<%= header.name %>:  <%= header.decoded %>
-<% end %>
+<%= @mail.header_fields.collect { |header| "#{header.name}:   #{header.decoded}\n"}%>
 </pre>
 <!--
 <h3>Debug output</h3>
