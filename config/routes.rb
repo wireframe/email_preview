@@ -1,4 +1,4 @@
-Rails.application.routes.draw do |map|
+Rails.application.routes.draw do
   resources :email_preview, :controller => 'email_preview', :only => [:index, :show] do
     collection do
       get :navigation
