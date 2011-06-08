@@ -1,64 +1,10 @@
-<style>
-  .headers {
-    color: #333;
-  }
-  .headers dl {
-    margin: 0;
-    padding: 0;
-    clear: both;
-  }
-  .headers dt {
-    width: 100px;
-    padding: 1px;
-    float: left;
-    text-align: right;
-    font-weight: bold;
-    color: #7f7f7f;
-  }
-  .headers dd {
-    margin-left: 110px;
-    padding: 1px;
-  }
-
-  .deliver_form {
-    margin-bottom: 0;
-    float: right;
-  }
-  .deliver_form input {
-    width: 250px;
-  }
-  .content_type {
-    margin: .5em 0;
-  }
-</style>
-<%= form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>
-  <%= text_field_tag :to, '', :placeholder => 'Send this email to me@yourcompany.com' %>
-  <button type="submit">Send</button>
-<% end %>
-<h2>Headers</h2>
-<div class="headers">
-<% @mail.header_fields.each do |header| %>
- <dl>
-   <dt><%= header.name %></dt>
-   <dd><%= header.decoded %></dd>
- </dl>
-<% end %>
-</div>
-<!--
-<h3>Debug output</h3>
-<pre>
-  <%= @mail.to_s %>
-</pre>
--->
-
-<h2>Content Body</h2>
-<% parts = @mail.multipart? ? @mail.parts : [@mail] %>
-<% parts.each do |part| %>
-  <h3 class="content_type"><%= part.content_type %></h3>
-  <hr />
-  <% if part.content_type.include?('text/plain') %>
-    <pre><%= part.body %></pre>
-  <% elsif part.content_type.include?('text/html')%>
-    <%= part.body.to_s.html_safe %>
-  <% end %>
-<% end %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Preview</title>
+</head>
+<frameset rows="300px,*">
+  <frame src="<%= details_email_preview_path(params[:id]) %>" name="details" />
+  <frame name="preview" />
+</frameset>
+</html>

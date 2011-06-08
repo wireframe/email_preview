@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     end
     member do
       post :deliver
+      get :details
+      get :preview
     end
   end
 end

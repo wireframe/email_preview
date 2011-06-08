@@ -1,0 +1,49 @@
+<style>
+  .headers {
+    color: #333;
+  }
+  .headers dl {
+    margin: 0;
+    padding: 0;
+    clear: both;
+  }
+  .headers dt {
+    width: 100px;
+    padding: 1px;
+    float: left;
+    text-align: right;
+    font-weight: bold;
+    color: #7f7f7f;
+  }
+  .headers dd {
+    margin-left: 110px;
+    padding: 1px;
+  }
+
+  .deliver_form {
+    margin-bottom: 0;
+    float: right;
+  }
+  .deliver_form input {
+    width: 250px;
+    }
+</style>
+<%= form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>
+  <%= text_field_tag :to, '', :placeholder => 'Send this email to me@yourcompany.com' %>
+  <button type="submit">Send</button>
+<% end %>
+<h2>Headers</h2>
+<div class="headers">
+<% @mail.header_fields.each do |header| %>
+ <dl>
+   <dt><%= header.name %></dt>
+   <dd><%= header.decoded %></dd>
+ </dl>
+<% end %>
+</div>
+
+<h2>Content</h2>
+<% @parts.each do |part| %>
+  <% render_format = part.content_type.include?('text/html') ? 'html' : 'txt' %>
+  <%= link_to "View #{render_format} output", preview_email_preview_path(params[:id], :format => render_format), :target => 'preview' %>
+<% end %>
