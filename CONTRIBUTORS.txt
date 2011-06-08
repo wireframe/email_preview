@@ -1,0 +1,4 @@
+Ryan Sonnek - Original Author
+
+Complete list of contributors:
+https://github.com/wireframe/email_preview/contributors
