@@ -50,6 +50,8 @@ end
 browse the list of registered emails and preview them in your browser at:
 http://localhost:3000/email_preview
 
+![screenshot](https://img.skitch.com/20110608-p2mck7sahpu3h8uit7akq487w2.jpg)
+
 by default the email_preview feature is only available in development mode.  to turn on globally use:
 
 ```ruby
