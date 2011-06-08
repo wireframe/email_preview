@@ -1,5 +1,5 @@
 require 'mail'
-require 'engine' if defined?(Rails)
+require 'email_preview/engine' if defined?(Rails)
 
 module EmailPreview
   class << self
