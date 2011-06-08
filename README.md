@@ -51,6 +51,7 @@ browse the list of registered emails and preview them in your browser at:
 http://localhost:3000/email_preview
 
 by default the email_preview feature is only available in development mode.  to turn on globally use:
+
 ```ruby
 # config/initializers/email_preview.rb
 EmailPreview.allowed_environments << 'production'
