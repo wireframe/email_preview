@@ -11,9 +11,9 @@ class EmailPreviewController < ApplicationController
   end
   def preview
     @part = if request.format == 'html'
-              @parts.detect {|p| p.content_type.include?('text/html') }
+              @parts.detect {|p| p.content_type && p.content_type.include?('text/html') }
             else
-              @parts.detect {|p| p.content_type.include?('text/plain') }
+              @parts.detect {|p| p.content_type && p.content_type.include?('text/plain') }
             end
     @part ||= @parts.first
     render :text => @part.body.to_s

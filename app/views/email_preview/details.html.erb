@@ -26,7 +26,7 @@
   }
   .deliver_form input {
     width: 250px;
-    }
+  }
 </style>
 <%= form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>
   <%= text_field_tag :to, '', :placeholder => 'Send this email to me@yourcompany.com' %>
@@ -43,7 +43,11 @@
 </div>
 
 <h2>Content</h2>
+<ul>
 <% @parts.each do |part| %>
-  <% render_format = part.content_type.include?('text/html') ? 'html' : 'txt' %>
-  <%= link_to "View #{render_format} output", preview_email_preview_path(params[:id], :format => render_format), :target => 'preview' %>
+  <% render_format = (part.content_type && part.content_type.include?('text/html')) ? 'html' : 'txt' %>
+  <li>
+    <%= link_to "View #{render_format} output", preview_email_preview_path(params[:id], :format => render_format), :target => 'preview' %>
+  </li>
 <% end %>
+</ul>
