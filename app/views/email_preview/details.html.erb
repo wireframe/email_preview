@@ -1,4 +1,9 @@
 <style>
+  h2, ul, li { margin:0; padding:0;  }
+
+  h2 {
+    margin: 5px;
+  }
   .headers {
     color: #333;
   }
@@ -26,6 +31,13 @@
   }
   .deliver_form input {
     width: 250px;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+  li {
+    margin-left: 10px
   }
 </style>
 <%= form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>

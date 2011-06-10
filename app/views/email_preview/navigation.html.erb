@@ -1,5 +1,22 @@
-<ul>
-<% EmailPreview.emails.each_index do |index| %>
-  <li><%= link_to EmailPreview.emails[index][:description], email_preview_path(index), :target => 'show' %>
-<% end%>
-</ul>
+<style type='text/css'>
+  ul, li, h3 { margin: 0; padding: 0; }
+
+  ul {
+    list-style-type: none;
+  }
+  li {
+    margin-left: 10px;
+  }
+  h3 {
+    margin: 5px;
+  }
+</style>
+<% EmailPreview.categories.each do |category| %>
+  <h3><%= category %></h3>
+  <ul>
+  <% EmailPreview.registry.each_pair do |key, options| %>
+    <% next unless options[:category] == category %>
+    <li><%= link_to EmailPreview.registry[key][:description], email_preview_path(key), :target => 'show' %>
+  <% end%>
+  </ul>
+<% end %>
