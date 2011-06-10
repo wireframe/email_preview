@@ -62,6 +62,7 @@ When you have lots of emails in your app, it's useful to group them into
 related topics.
 
 ```ruby
+# config/initializers/email_preview.rb
 EmailPreview.register 'User activation', :category => :user do
   u = User.new :email => 'foo@example.com'
   UserMailer.activation(u)
