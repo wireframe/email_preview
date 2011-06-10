@@ -9,6 +9,7 @@ module EmailPreview
 
     def register(description, options={}, &block)
       key = description.hash.abs
+      options[:key] = key
       options[:category] ||= 'General'
       options[:description] ||= description
       options[:block] ||= block

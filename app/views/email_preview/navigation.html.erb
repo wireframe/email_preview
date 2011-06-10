@@ -14,9 +14,9 @@
 <% EmailPreview.categories.each do |category| %>
   <h3><%= category %></h3>
   <ul>
-  <% EmailPreview.registry.each_pair do |key, options| %>
+  <% EmailPreview.registry.values.sort_by {|o| o[:description]}.each do |options| %>
     <% next unless options[:category] == category %>
-    <li><%= link_to EmailPreview.registry[key][:description], email_preview_path(key), :target => 'show' %>
+    <li><%= link_to options[:description], email_preview_path(options[:key]), :target => 'show' %>
   <% end%>
   </ul>
 <% end %>
