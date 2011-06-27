@@ -1,8 +1,9 @@
 class EmailPreviewController < ApplicationController
   unloadable
+  layout nil
+
   before_filter :enforce_allowed_environments
   before_filter :build_email, :only => [:show, :deliver, :details, :preview]
-  layout nil
 
   def deliver
     @mail.to params[:to]
@@ -23,6 +24,7 @@ class EmailPreviewController < ApplicationController
     raise "'#{Rails.env}' is not in the supported list of environments from EmailPreview.allowed_environments: #{EmailPreview.allowed_environments.inspect}" unless EmailPreview.allowed_environments.include?(Rails.env)
   end
   def build_email
+    @fixture = EmailPreview.registry[params[:id]]
     @mail = EmailPreview.preview params[:id]
     @parts = @mail.multipart? ? @mail.parts : [@mail]
   end
