@@ -8,7 +8,7 @@ class EmailPreviewController < ApplicationController
   def deliver
     @mail.to params[:to]
     @mail.deliver
-    redirect_to email_preview_path(params[:id])
+    redirect_to details_email_preview_path(params[:id])
   end
   def preview
     @part = if request.format == 'html'
