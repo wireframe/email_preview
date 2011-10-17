@@ -1,5 +1,5 @@
 require 'mail'
-require 'email_preview/engine' if defined?(Rails)
+require 'email_preview/engine'
 require 'email_preview/fixture'
 
 module EmailPreview
