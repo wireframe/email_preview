@@ -1,2 +1,4 @@
-class EmailPreviewEngine < Rails::Engine
+module EmailPreview
+  class Engine < Rails::Engine
+  end
 end

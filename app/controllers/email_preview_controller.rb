@@ -24,7 +24,7 @@ class EmailPreviewController < ApplicationController
     raise "'#{Rails.env}' is not in the supported list of environments from EmailPreview.allowed_environments: #{EmailPreview.allowed_environments.inspect}" unless EmailPreview.allowed_environments.include?(Rails.env)
   end
   def build_email
-    @fixture = EmailPreview.registry[params[:id]]
+    @fixture = EmailPreview[params[:id]]
     @mail = EmailPreview.preview params[:id]
     @parts = @mail.multipart? ? @mail.parts : [@mail]
   end

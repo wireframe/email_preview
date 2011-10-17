@@ -13,7 +13,7 @@ class TestEmailPreview < Test::Unit::TestCase
       end
     end
     should "have one entry in the configuration" do
-      assert_equal 1, EmailPreview.registry.keys.length
+      assert_equal 1, EmailPreview.registry.length
     end
   end
 end

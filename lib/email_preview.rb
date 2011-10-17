@@ -1,5 +1,6 @@
 require 'mail'
 require 'email_preview/engine' if defined?(Rails)
+require 'email_preview/fixture'
 
 module EmailPreview
   class << self
@@ -10,24 +11,23 @@ module EmailPreview
     attr_accessor :before_preview_hook
 
     def register(description, options={}, &block)
-      key = self.registry.keys.length + 1
-      options[:key] = key
-      options[:category] ||= 'General'
-      options[:description] ||= description.to_s
-      options[:block] ||= block
-      self.registry[key] = options
+      fixture = EmailPreview::Fixture.new(description, options, &block)
+      self.registry << fixture
     end
     def categories
-      self.registry.values.collect {|f| f[:category] }.uniq
+      self.registry.collect {|f| f.category }.uniq
     end
     def preview(key)
       EmailPreview.before_preview_hook.call
       mail = nil
       ActiveRecord::Base.transaction do
-        mail = self.registry[key.to_i][:block].call
+        mail = self[key].preview
         raise ActiveRecord::Rollback, "EmailPreview rollback" if EmailPreview.transactional?
       end
       mail
+    end
+    def [](key)
+      self.registry[key.to_i]
     end
     def transactional?
       !!self.transactional
@@ -36,26 +36,10 @@ module EmailPreview
       @before_preview_hook = block
     end
   end
-
-  class Fixture
-    attr_accessor :id, :category, :description, :callback
-    def preview
-      @mail ||= self.callback.call
-    end
-    def preview_with_transaction
-      return preview_without_transaction unless EmailPreview.transactional?
-      mail = nil
-      ActiveRecord::Base.transaction do
-        mail = preview_without_transaction
-        raise ActiveRecord::Rollback, "EmailPreview rollback"
-      end
-      mail
-    end
-  end
 end
 
 # initialize registry
-EmailPreview.registry = {}
+EmailPreview.registry = []
 
 # default to only run in development and test environment
 EmailPreview.allowed_environments = %w{ development test }

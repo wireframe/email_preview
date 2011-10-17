@@ -5,6 +5,6 @@
 </head>
 <frameset rows="250px,*">
   <frame src="<%= details_email_preview_path(params[:id]) %>" name="details" />
-  <frame name="preview" />
+  <frame name="preview" src="<%= preview_email_preview_path(params[:id], :format => render_format(@parts.first)) %>" />
 </frameset>
 </html>

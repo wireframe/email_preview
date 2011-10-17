@@ -2,6 +2,7 @@
   h2, ul, li { margin:0; padding:0;  }
 
   h2 {
+    clear: both;
     margin: 5px;
   }
   .headers {
@@ -57,9 +58,8 @@
 <h2>Content</h2>
 <ul>
 <% @parts.each do |part| %>
-  <% render_format = (part.content_type && part.content_type.include?('text/html')) ? 'html' : 'txt' %>
   <li>
-    <%= link_to "View #{render_format} output", preview_email_preview_path(params[:id], :format => render_format), :target => 'preview' %>
+    <%= link_to "View #{render_format(part)} output", preview_email_preview_path(params[:id], :format => render_format(part)), :target => 'preview' %>
   </li>
 <% end %>
 </ul>
