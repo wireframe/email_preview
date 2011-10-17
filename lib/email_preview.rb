@@ -1,6 +1,5 @@
 require 'mail'
 require 'email_preview/engine' if defined?(Rails)
-require 'active_support/secure_random'
 
 module EmailPreview
   class << self
@@ -11,10 +10,10 @@ module EmailPreview
     attr_accessor :before_preview_hook
 
     def register(description, options={}, &block)
-      key = self.registry.keys.length + 1 #ActiveSupport::SecureRandom.hex
+      key = self.registry.keys.length + 1
       options[:key] = key
       options[:category] ||= 'General'
-      options[:description] ||= description
+      options[:description] ||= description.to_s
       options[:block] ||= block
       self.registry[key] = options
     end
@@ -52,7 +51,6 @@ module EmailPreview
       end
       mail
     end
-    # alias_method_chain :preview, :transaction
   end
 end
 
