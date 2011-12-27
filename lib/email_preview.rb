@@ -19,12 +19,7 @@ module EmailPreview
     end
     def preview(key)
       EmailPreview.before_preview_hook.call
-      mail = nil
-      ActiveRecord::Base.transaction do
-        mail = self[key].preview
-        raise ActiveRecord::Rollback, "EmailPreview rollback" if EmailPreview.transactional?
-      end
-      mail
+      self[key].preview
     end
     def [](key)
       self.registry[key.to_i]

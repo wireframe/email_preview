@@ -1,10 +1,8 @@
-require 'rubygems'
-require 'test/unit'
+# Configure Rails Environment
+ENV["RAILS_ENV"] = "test"
+
+require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require "rails/test_help"
 require 'shoulda'
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'email_preview'
-
-class Test::Unit::TestCase
-end
+Rails.backtrace_cleaner.remove_silencers!
