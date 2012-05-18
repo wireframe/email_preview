@@ -83,6 +83,17 @@ To make it available to other environments use:
 EmailPreview.allowed_environments << 'production'
 ```
 
+### (optional) set a different delivery method in development
+
+By default emails are delivered with the delivery_method configured for your application.
+You can override this so that if you use :test for development you can still deliver mails
+when you use the send test email form.
+
+```ruby
+# config/environments/development.rb
+EmailPreview.delivery_method = :smtp # or :sendmail, etc
+ActionMailer::Base.smtp_settings = {:port => 12345} # additional configuration is optional
+```
 
 ## Contributing 
 

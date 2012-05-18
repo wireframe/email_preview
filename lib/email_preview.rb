@@ -9,6 +9,7 @@ module EmailPreview
     attr_accessor :transactional
     attr_accessor :logger
     attr_accessor :before_preview_hook
+    attr_accessor :delivery_method
 
     def register(description, options={}, &block)
       fixture = EmailPreview::Fixture.new(description, options, &block)
