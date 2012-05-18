@@ -7,6 +7,9 @@ class EmailPreviewController < ApplicationController
 
   def deliver
     @mail.to params[:to]
+    if EmailPreview.delivery_method
+      @mail.delivery_method(ActionMailer::Base.delivery_methods[EmailPreview.delivery_method], ActionMailer::Base.send("#{EmailPreview.delivery_method}_settings"))
+    end
     @mail.deliver
     redirect_to details_email_preview_path(params[:id])
   end
