@@ -55,6 +55,15 @@
 <% end %>
 </div>
 
+<% if @mail.attachments.any? %>
+<h2>Attachments</h2>
+<ul>
+  <% @mail.attachments.each do |attachment| %>
+  <li><%= attachment.filename %></li>
+  <% end %>
+</ul>
+<% end %>
+
 <h2>Content</h2>
 <ul>
 <% @parts.each do |part| %>

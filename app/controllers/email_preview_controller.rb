@@ -18,11 +18,8 @@ class EmailPreviewController < ApplicationController
     redirect_to details_email_preview_path(params[:id])
   end
   def preview
-    @part = if request.format == 'html'
-      @parts.detect {|p| p.content_type && p.content_type.include?('text/html') }
-    else
-      @parts.detect {|p| p.content_type && p.content_type.include?('text/plain') }
-    end
+    content_type = (request.format == 'html' ? 'text/html' : 'text/plain')
+    @part = @parts.detect { |p| p.content_type && p.content_type.include?(content_type) } || @parts.first
     @part ||= @parts.first
     render :text => @part.body.to_s
   end
@@ -32,6 +29,11 @@ class EmailPreviewController < ApplicationController
   end
   def build_email
     @mail = EmailPreview.preview params[:id]
-    @parts = @mail.multipart? ? @mail.parts : [@mail]
+    @parts = @mail.multipart? ? detect_content_parts(@mail.parts) : [@mail]
+  end
+
+  def detect_content_parts(parts)
+    alternative = parts.detect { |p| p.content_type && p.content_type.include?('multipart/alternative') }
+    alternative ? alternative.parts : parts
   end
 end
