@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency(%q<shoulda>, [">= 0"])
   s.add_development_dependency(%q<rake>, ["0.9.2"])
   s.add_development_dependency(%q<sqlite3>, ["1.3.6"])
+  s.add_development_dependency(%q<pry>, ["0.9.9.6"])
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
