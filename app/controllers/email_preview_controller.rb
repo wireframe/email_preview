@@ -11,7 +11,7 @@ class EmailPreviewController < ApplicationController
     previous_delivery_method = ActionMailer::Base.delivery_method
     begin
       ActionMailer::Base.delivery_method = EmailPreview.delivery_method if EmailPreview.delivery_method
-      @mail.deliver
+      @mail.respond_to?(:deliver_now) ? @mail.deliver_now : @mail.deliver
     ensure
       ActionMailer::Base.delivery_method = previous_delivery_method
     end
