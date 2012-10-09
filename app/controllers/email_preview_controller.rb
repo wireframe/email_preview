@@ -9,7 +9,6 @@ class EmailPreviewController < ApplicationController
   def deliver
     @mail.to params[:to]
     @mail.respond_to?(:deliver_now) ? @mail.deliver_now : @mail.deliver
-    @mail.deliver
     redirect_to details_email_preview_path(params[:id])
   end
   def preview
