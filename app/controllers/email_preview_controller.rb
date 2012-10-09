@@ -6,6 +6,7 @@ class EmailPreviewController < ApplicationController
   before_filter :build_email, :only => [:show, :deliver, :details, :preview]
 
   def deliver
+    session[:email_preview_to] = params[:to]
     @mail.to params[:to]
     
     previous_delivery_method = ActionMailer::Base.delivery_method

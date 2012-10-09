@@ -42,8 +42,8 @@
   }
 </style>
 <%= form_tag deliver_email_preview_path(params[:id]), :class => 'deliver_form' do %>
-  <%= text_field_tag :to, '', :placeholder => 'Send this email to me@yourcompany.com' %>
-  <button type="submit">Send</button>
+  <%= text_field_tag :to, session[:email_preview_to], :placeholder => 'Send this email to me@yourcompany.com' %>
+  <button type="submit">Deliver Preview</button>
 <% end %>
 <h2>Headers</h2>
 <div class="headers">
