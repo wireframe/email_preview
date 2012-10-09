@@ -3,18 +3,13 @@ class EmailPreviewController < ApplicationController
   layout false
 
   before_filter :enforce_allowed_environments
+  around_filter :set_delivery_method, :only => :deliver
   before_filter :build_email, :only => [:show, :deliver, :details, :preview]
 
   def deliver
     @mail.to params[:to]
-    
-    previous_delivery_method = ActionMailer::Base.delivery_method
-    begin
-      ActionMailer::Base.delivery_method = EmailPreview.delivery_method if EmailPreview.delivery_method
-      @mail.respond_to?(:deliver_now) ? @mail.deliver_now : @mail.deliver
-    ensure
-      ActionMailer::Base.delivery_method = previous_delivery_method
-    end
+    @mail.respond_to?(:deliver_now) ? @mail.deliver_now : @mail.deliver
+    @mail.deliver
     redirect_to details_email_preview_path(params[:id])
   end
   def preview
@@ -33,5 +28,12 @@ class EmailPreviewController < ApplicationController
   def build_email
     @mail = EmailPreview.preview params[:id]
     @parts = @mail.multipart? ? @mail.parts : [@mail]
+  end
+  def set_delivery_method
+    previous_delivery_method = ActionMailer::Base.delivery_method
+    ActionMailer::Base.delivery_method = EmailPreview.delivery_method if EmailPreview.delivery_method
+    yield
+  ensure
+    ActionMailer::Base.delivery_method = previous_delivery_method
   end
 end
