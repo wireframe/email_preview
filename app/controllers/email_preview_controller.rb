@@ -1,5 +1,4 @@
 class EmailPreviewController < ApplicationController
-  unloadable
   layout false
 
   before_filter :enforce_allowed_environments
