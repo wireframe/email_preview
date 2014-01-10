@@ -1,6 +1,6 @@
+[![Build Status](https://travis-ci.org/wireframe/email_preview.png?branch=master)](https://travis-ci.org/wireframe/email_preview)
 # email_preview
-
-preview emails within your web browser
+> preview application emails within your web browser
 
 ## Features
 * preview HTML or plain text emails from within your web browser
@@ -43,7 +43,7 @@ EmailPreview.register 'multipart email (html + text)' do
 end
 
 # Rails ActionMailer Example
-# each execution is wrapped with a transaction and 
+# each execution is wrapped with a transaction and
 # rolled back after completed so there are no side-effects
 EmailPreview.register 'Rails ActionMailer User activation email' do
   u = User.create :email => 'foo@example.com'
@@ -75,7 +75,7 @@ end
 
 ### (optional) expose to production environment
 
-By default the email_preview feature is only available in development mode.  
+By default the email_preview feature is only available in development mode.
 To make it available to other environments use:
 
 ```ruby
@@ -95,7 +95,7 @@ EmailPreview.delivery_method = :smtp # or :sendmail, etc
 ActionMailer::Base.smtp_settings = {:port => 12345} # additional configuration is optional
 ```
 
-## Contributing 
+## Contributing
 
 * Fork the project
 * Fix the issue
